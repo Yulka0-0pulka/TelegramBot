@@ -26,3 +26,22 @@
 
 5. Код выложить на гитхаб или хероку.
 
+
+Установка и развертывание
+Скопировать репозиторий
+$ git clone https://github.com/aeroalgo/TelegramBot.git
+Установить виртуальное окружение для Windows / Mac или Linux
+
+$ python -m venv venv / python3 -m venv venv
+Активировать виртуальное окружение для Windows / Mac или Linux
+
+$ source venv/Scripts/activate  / source venv/bin/activate 
+Установить зависимости
+
+.env.dist переименовать в .env, установить token и admin id
+
+$ pip install requirements.txt
+Запустить файл app.py
+
+(@pizza_aero_bot - ник бота в телеграме, его можно протестировать.)
+
