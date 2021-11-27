@@ -44,13 +44,13 @@ async def order_handler(message: types.Message):
                 if message.text.capitalize() not in users_queue[user].command:
                     await message.answer('Нет такой команды, попробуйте снова')
 
-                if message.text.capitalize() in users_queue[user].command:
+                elif message.text.capitalize() in users_queue[user].command:
                     users_queue[user].trigger(message.text.capitalize())
                     print(users_queue[user].state)
                     await message.answer(users_queue[user].message)
-                    if users_queue[user].state == 'Конец заказа':
-                        # side effect
-                        # changed size during iteration
-                        del users_queue[user]
+                if users_queue[user].state == 'Конец заказа':
+                    # side effect
+                    # changed size during iteration
+                    del users_queue[user]
         except:
             await message.answer('Продолжите или отмените заказ /cancel')
