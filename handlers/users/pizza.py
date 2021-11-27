@@ -29,7 +29,7 @@ async def cmd_reset(message: types.Message):
 async def cmd_reset(message: types.Message):
     for user in users_queue:
         if message.from_user.id == user:
-            users_queue[message.from_user.id] = PizzaFsm()
+            del users_queue[user]
             await message.answer("Заказ отменен! Чтобы заказать снова, нажмите /pizza")
 
 
