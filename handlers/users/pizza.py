@@ -11,6 +11,7 @@ users_queue = {}
 @dp.message_handler(commands=['pizza'])
 async def taking_order_handler(message: types.Message):
     if message.from_user.id not in users_queue:
+        # side effect
         users_queue[message.from_user.id] = PizzaFsm()
     for user in users_queue:
         if message.from_user.id == user:
@@ -29,6 +30,8 @@ async def cmd_reset(message: types.Message):
 async def cmd_reset(message: types.Message):
     for user in users_queue:
         if message.from_user.id == user:
+            # side effect
+            # changed size during iteration
             del users_queue[user]
             await message.answer("Заказ отменен! Чтобы заказать снова, нажмите /pizza")
 
@@ -46,6 +49,8 @@ async def order_handler(message: types.Message):
                     print(users_queue[user].state)
                     await message.answer(users_queue[user].message)
                     if users_queue[user].state == 'Конец заказа':
+                        # side effect
+                        # changed size during iteration
                         del users_queue[user]
         except:
             await message.answer('Продолжите или отмените заказ /cancel')
