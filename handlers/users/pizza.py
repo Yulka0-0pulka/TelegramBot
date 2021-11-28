@@ -23,10 +23,10 @@ async def taking_order_handler(message: types.Message):
 @dp.message_handler(commands=['reset'])
 async def cmd_reset(message: types.Message):
     for user in users_queue:
-        # Переопределение класса стейт машины
+        # Переопределение класса стейт машины для юзера который решил ресетнуть заказ
         if message.from_user.id == user:
             users_queue[message.from_user.id] = PizzaFsm()
-            await message.answer("Какую вы хотите пиццу? Большую или маленькую?")
+            await message.answer(users_queue[user].message)
 
 
 @dp.message_handler(commands=['cancel'])
