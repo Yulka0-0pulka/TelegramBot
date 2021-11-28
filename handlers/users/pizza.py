@@ -47,7 +47,8 @@ async def order_handler(message: types.Message):
             if message.from_user.id == user:
                 # Проверяем валидность команд
                 if message.text.capitalize() not in users_queue[user].command:
-                    await message.answer('Нет такой команды, попробуйте снова')
+                    await message.answer(f'Нет такой команды, попробуйте снова \n'
+                                         'Перезаказать /reset')
 
                 elif message.text.capitalize() in users_queue[user].command:
                     users_queue[user].trigger(message.text.capitalize())
@@ -59,5 +60,5 @@ async def order_handler(message: types.Message):
                     del users_queue[user]
         # Перехватываем все ошибки при валидных командах но неправильном движении по логике
         except:
-            await message.answer('Продолжите или отмените заказ /cancel '
+            await message.answer(f'Продолжите или отмените заказ /cancel \n'
                                  'Перезаказать /reset')
