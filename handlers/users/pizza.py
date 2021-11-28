@@ -31,17 +31,19 @@ async def cmd_reset(message: types.Message):
 
 @dp.message_handler(commands=['cancel'])
 async def cmd_reset(message: types.Message):
-    # При закрытии заказа удаляем юзера из очереди
+    remove_user_queue = []
+    # При закрытии заказа дабавляем юзера на удаление из очереди
     for user in users_queue:
         if message.from_user.id == user:
-            # side effect
-            # changed size during iteration
-            del users_queue[user]
+            remove_user_queue.append(message.from_user.id)
             await message.answer("Заказ отменен! Чтобы заказать снова, нажмите /pizza")
+    for remove_user in remove_user_queue:
+        del users_queue[remove_user]
 
 
 @dp.message_handler()
 async def order_handler(message: types.Message):
+    remove_user_queue = []
     for user in users_queue:
         try:
             if message.from_user.id == user:
@@ -53,12 +55,12 @@ async def order_handler(message: types.Message):
                 elif message.text.capitalize() in users_queue[user].command:
                     users_queue[user].trigger(message.text.capitalize())
                     await message.answer(users_queue[user].message)
-                # При совершенном или отмененном заказе на последней стадии удаляем юзера из очереди
+                # При совершенном или отмененном заказе на последней стадии добавляем в список на удаление
                 if users_queue[user].state == 'Конец заказа':
-                    # side effect
-                    # changed size during iteration
-                    del users_queue[user]
+                    remove_user_queue.append(message.from_user.id)
         # Перехватываем все ошибки при валидных командах но неправильном движении по логике
         except:
             await message.answer(f'Продолжите или отмените заказ /cancel \n'
                                  'Перезаказать /reset')
+    for remove_user in remove_user_queue:
+        del users_queue[remove_user]
