@@ -14,8 +14,6 @@ from model.engine import insert_image, session
 from loader import bot
 from datetime import datetime, timedelta
 from sqlalchemy import delete
-# code smell
-users_queue = {}
 
 
 @dp.message_handler(commands=['photo'])
