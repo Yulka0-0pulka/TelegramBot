@@ -9,7 +9,7 @@ from data.config import BOT_TOKEN
 
 from model.models import Base, Topic
 engine = create_engine(
-    "postgresql+psycopg2://postgres:postgres@localhost:5444/db_test")
+    "postgresql+psycopg2://postgres:postgres@localhost:5454/db_telegram")
 session = Session(bind=engine)
 
 
@@ -29,3 +29,4 @@ def insert_image(url, content_type, model, chanel_id) -> None:
 if __name__ == "__main__":
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
+    

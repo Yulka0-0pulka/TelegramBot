@@ -22,7 +22,6 @@ class Topic(Base):
         autoincrement=True
     )
     url = Column(String, comment='Адрес картинки', unique=True)
-    print(url)
     content_type = Column(String)
     chanel_id = Column(String)
 
