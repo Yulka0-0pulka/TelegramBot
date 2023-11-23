@@ -6,7 +6,6 @@ from setuptools import Command
 from data.maping import channels
 from model.models import Replay, Topic
 from parser.asa import get_download_content
-from states.state_pizza import PizzaFsm
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from loader import dp
@@ -60,4 +59,3 @@ async def taking_order_handler(message: types.Message):
                 is_sent[chanel] = False
 
             await asyncio.sleep(100)
-

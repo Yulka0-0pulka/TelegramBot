@@ -17,7 +17,7 @@ def get_download_content(channel):
         for tag in data:
             print(tag)
             payload = {
-                "query": " query SubredditQuery( $url: String! $filter: SubredditPostFilter $iterator: String ) { getSubreddit(url: $url) { children( limit: 50 iterator: $iterator filter: $filter disabledHosts: null ) { iterator items { __typename id url title subredditId subredditTitle subredditUrl redditPath isNsfw albumUrl hasAudio fullLengthSource gfycatSource redgifsSource ownerAvatar username displayName isPaid tags isFavorite mediaSources { url width height isOptimized } blurredMediaSources { url width height isOptimized } } } } } ",
+                "query": " query SubredditQuery( $url: String! $filter: SubredditPostFilter $iterator: String ) { getSubreddit(url: $url) { children( limit: 20 iterator: $iterator filter: $filter disabledHosts: null ) { iterator items { __typename id url title subredditId subredditTitle subredditUrl redditPath isNsfw albumUrl hasAudio fullLengthSource gfycatSource redgifsSource ownerAvatar username displayName isPaid tags isFavorite mediaSources { url width height isOptimized } blurredMediaSources { url width height isOptimized } } } } } ",
                 "variables": {
                     "url": f"{tag}",
                     "filter": None,
@@ -27,24 +27,24 @@ def get_download_content(channel):
 
             r = requests.post(
                 'https://api.scrolller.com/api/v2/graphql', json=payload)
-
-            all_objects = r.json().get("data").get(
-                "getSubreddit").get("children").get("items")  # выводит все 50 объектов с каждого значения из channels по разным размерам
-            for data in all_objects:
-                print(data.get("id"))
-                print(data.get("mediaSources")[-1])
-                url = data.get("mediaSources")[-1].get("url")  # выводит ссылки
-                content_type = requests.get(url)
-                content_type = content_type.headers.get(
-                    "Content-Type")  # определяет видео или фото
-                try:
+            
+            try:
+                all_objects = r.json().get("data").get(
+                    "getSubreddit").get("children").get("items")
+                for data in all_objects:
+                    print(data.get("id"))
+                    print(data.get("mediaSources")[-1])
+                    url = data.get("mediaSources")[-1].get("url") 
+                    content_type = requests.get(url)
+                    content_type = content_type.headers.get(
+                        "Content-Type")
                     if not check_exists_url(url=url):
                         insert_image(
                             url=url, content_type=content_type,
                             model=Topic, chanel_id=channel
                         )
-                except:
-                    continue
+            except:
+                continue
 
 
 if __name__ == "__main__":

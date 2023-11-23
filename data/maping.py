@@ -3,7 +3,6 @@ channels = {
         'tag': ['r/WhatsWrongWithYourDog', 'r/gentlemanimals', 'r/PatientDogs', 'r/Animals',
                 'r/AnimalTextGifs', 'r/AnimalsBeingJerks'],
         'button': 'Животные', 'callback': 'animals'
-
     },
     -844258415: {
         'tag': ['r/catpranks', 'r/CatTaps', 'r/CatTaps', 'r/TIGHTPUSSY', 'r/CatsISUOTTATFO',
@@ -42,4 +41,4 @@ headers = {'authority': 'api.scrolller.com',
            'sec-fetch-dest': 'empty',
            'sec-fetch-mode': 'cors',
            'sec-fetch-site': 'same-site',
-           'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (HTML, like Gecko) Chrome/108.0.0.0 YaBrowser/23.1.1.1114 Yowser/2.5 Safari/537.36'}
+           'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 YaBrowser/23.1.1.1114 Yowser/2.5 Safari/537.36'}
