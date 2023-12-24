@@ -1,13 +1,8 @@
-from email import message
-from gettext import dpgettext
-from xml.parsers.expat import model
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
-from aiogram import Bot, types
-from data.config import BOT_TOKEN
 
 
-from model.models import Base, Topic
+from model.models import Base
 engine = create_engine(
     "postgresql+psycopg2://postgres:postgres@localhost:5454/db_telegram")
 session = Session(bind=engine)

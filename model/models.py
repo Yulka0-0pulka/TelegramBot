@@ -1,9 +1,5 @@
-from requests import Session
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, Date, DateTime, func
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, DateTime, func
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
 
 Base = declarative_base()
 

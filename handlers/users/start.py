@@ -1,6 +1,5 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
-from setuptools import Command
 from data.maping import channels
 from datetime import datetime, timedelta
 from keyboards.bot_keyboards import genmarkup

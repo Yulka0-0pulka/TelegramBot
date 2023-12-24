@@ -1,16 +1,12 @@
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
-from csv import excel
 from functools import partial
-from itertools import count
-import re
 
-from setuptools import Command
+
 from data.maping import channels
 from model.models import Replay, Topic
 from parser.parser import get_download_content
 from aiogram import types
-from aiogram.dispatcher import FSMContext
 from loader import dp
 from model.engine import insert_image, session
 from loader import bot
