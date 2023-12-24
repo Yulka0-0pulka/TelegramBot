@@ -9,10 +9,9 @@ from handlers.users.content import taking_order_handler
 
 
 async def on_startup(dispatcher):
-    # Устанавливаем дефолтные команды
+
     await set_default_commands(dispatcher)
 
-    # Уведомляет про запуск
     await on_startup_notify(dispatcher)
 
 

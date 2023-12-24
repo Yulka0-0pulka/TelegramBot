@@ -1,16 +1,12 @@
 import asyncio
 from concurrent.futures import ProcessPoolExecutor
-from csv import excel
 from functools import partial
-from itertools import count
-import re
 
-from setuptools import Command
+
 from data.maping import channels
 from model.models import Replay, Topic
 from parser.parser import get_download_content
 from aiogram import types
-from aiogram.dispatcher import FSMContext
 from loader import dp
 from model.engine import insert_image, session
 from loader import bot
@@ -21,7 +17,6 @@ from sqlalchemy import delete
 @dp.message_handler(commands=['photo'])
 async def taking_order_handler(message: types.Message):
     loop = asyncio.get_running_loop()
-    is_sent: dict[int, bool] = {x: False for x in channels}
     while True:
         for chanel in channels:
             image_obj = session.query(Topic).filter(
@@ -65,7 +60,7 @@ async def taking_order_handler(message: types.Message):
         session.execute(stmt)
         session.commit()
 
-        await asyncio.sleep(100)
+        await asyncio.sleep(5)
 
 
 async def download_content(channel, loop, ex):
