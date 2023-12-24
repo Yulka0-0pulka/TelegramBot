@@ -60,7 +60,7 @@ async def taking_order_handler(message: types.Message):
         session.execute(stmt)
         session.commit()
 
-        await asyncio.sleep(5)
+        await asyncio.sleep(100)
 
 
 async def download_content(channel, loop, ex):
