@@ -1,5 +1,5 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from data.maping import channels
+from config.maping import channels
 
 
 

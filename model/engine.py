@@ -1,35 +1,9 @@
-from typing import Literal
-from pydantic import validator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
-import os
 from model.models import Base
-from pydantic.v1 import BaseSettings, validator
-from environs import Env
+from config.setting import setting
 
-env = Env()
-environment: Literal["docker", "local"] = "docker"
-if environment == "docker":
-    env.read_env(path="./docker/.env")
-else:
-    env.read_env(path=".env")
-
-
-class Setting(BaseSettings):
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    PSQL_HOST: str
-    PSQL_PORT: str
-    POSTGRES_DB: str
-    BUILD_URL: str = None
-
-
-s = Setting()
-
-engine = create_engine(
-    f"postgresql+psycopg2://{s.POSTGRES_USER}:"
-    f"{s.POSTGRES_PASSWORD}@{s.PSQL_HOST}:"
-    f"{s.PSQL_PORT}/{s.POSTGRES_DB}")
+engine = create_engine(setting.BUILD_URL)
 session = Session(bind=engine)
 
 

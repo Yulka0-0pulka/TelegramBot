@@ -1,7 +1,7 @@
 import requests
 from aiogram import Bot, types
 from sqlalchemy import exists
-from data.maping import channels
+from config.maping import channels
 from model.engine import insert_image, session
 from model.models import Replay, Topic
 

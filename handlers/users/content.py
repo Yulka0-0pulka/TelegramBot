@@ -3,7 +3,7 @@ from concurrent.futures import ProcessPoolExecutor
 from functools import partial
 
 
-from data.maping import channels
+from config.maping import channels
 from model.models import Replay, Topic
 from parser.parser import get_download_content
 from aiogram import types
