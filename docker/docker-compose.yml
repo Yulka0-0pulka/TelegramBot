@@ -1,0 +1,48 @@
+version: '3.7'
+
+x-backend-env:
+  &backend-env
+    PSQL_HOST: ${PSQL_HOST}
+    PSQL_PORT: ${PSQL_PORT}
+    POSTGRES_USER: ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    POSTGRES_DB: ${POSTGRES_DB}
+    PYTHONPATH: /var/app
+
+
+x-backend:
+  &backend
+  build:
+    context: ../../
+    dockerfile: TelegramBot/docker/Dockerfile
+  restart: on-failure
+  tty: true
+  volumes:
+    - "../../TelegramBot:/var/app"
+  environment:
+    <<: *backend-env
+
+
+services:
+
+  # ####################################################################################################################
+  # Веб-сервисы (backend)
+  # ####################################################################################################################
+  backend:
+      <<: *backend
+
+
+  psql:
+    image: postgres:alpine
+    ports:
+      - "5445:5432"
+    volumes:
+      - "psql_data:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      
+
+volumes:
+  psql_data: {}

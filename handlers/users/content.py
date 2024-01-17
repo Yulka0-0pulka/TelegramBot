@@ -54,6 +54,8 @@ async def taking_order_handler(message: types.Message):
                             download_content(chanel, loop, ex))
                         )
                 await asyncio.gather(*tasks)
+                # Что бы не ждать тут, нужно сделать асинхронный воркер
+                # с сообщениями через redis/rabbitmq
 
         d = datetime.now() - timedelta(days=30)
         stmt = delete(Replay).where(Replay.date_update <= d)
