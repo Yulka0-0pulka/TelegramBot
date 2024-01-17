@@ -1,8 +1,10 @@
 from typing import Literal
+from pydantic import validator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
+import os
 from model.models import Base
-from pydantic.v1 import BaseSettings
+from pydantic.v1 import BaseSettings, validator
 from environs import Env
 
 env = Env()
