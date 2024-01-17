@@ -1,6 +1,6 @@
 from environs import Env
 from typing import Literal
-from pydantic.v1 import BaseSettings, root_validator
+from pydantic.v1 import BaseSettings, root_validator, validator
 env = Env()
 environment: Literal["docker", "local"] = "docker"
 if environment == "docker":
@@ -17,6 +17,7 @@ class Setting(BaseSettings):
     POSTGRES_DB: str
     BUILD_URL: str = None
     BOT_TOKEN: str
+    ADMINS: str | list[str]
 
     @root_validator()
     def build_url(cls, values):
@@ -27,6 +28,12 @@ class Setting(BaseSettings):
                 f"{values['PSQL_PORT']}/{values['POSTGRES_DB']}"
             )
 
+        return values
+
+    @validator("ADMINS")
+    def int_to_list(cls, values):
+        if isinstance(values, str):
+            values = values.split(",")
         return values
 
 
